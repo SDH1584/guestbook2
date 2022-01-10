@@ -45,7 +45,6 @@ public class Guestbookcontroller extends HttpServlet {
 		}else if("deleteForm".equals(action)) {
 			int no = Integer.parseInt(request.getParameter("no"));
 			request.setAttribute("no", no);
-			
 			RequestDispatcher rd= request.getRequestDispatcher("/WEB-INF/deleteForm.jsp");
 			rd.forward(request, response);
 

@@ -16,7 +16,6 @@ List<GuestbookVo> getList = (List<GuestbookVo>)request.getAttribute("getList");
 </head>
 <h1>guestbook2</h1>
 <body>
-	<!-- 등록폼영역 -->
 		<form action="/guestbook2/gbc" method="get">
 			<table border="1" width="500px">
 			<tr>
@@ -35,12 +34,13 @@ List<GuestbookVo> getList = (List<GuestbookVo>)request.getAttribute("getList");
 			</tr>
 			<tr>
 				<td colspan="4">
-					<button type="submit">확인</button>
+					<button type="submit">등록</button>
 				</td>
 			</tr>
 			</table>
 		</form>	
 	<br>
+
 
 	<%
 	for(int i = 0; i < getList.size(); i++) {

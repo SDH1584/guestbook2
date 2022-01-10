@@ -82,9 +82,8 @@ public class GuestbookDao {
 		close();
 
 		return getList;
-	}// getList()끝
+	}
 
-	// getInsert
 	public int guestbookInsert(GuestbookVo vo) {
 		int count = 0;
 		this.getConnection();
@@ -108,28 +107,23 @@ public class GuestbookDao {
 
 		this.close();
 		return count;
-	}//get insert end
+	}
 	
-	// 사람 삭제
 			public int guestbookDelete(int no,String password ) {
 				int count = 0;
 				getConnection();
 
 				try {
-					// 3. SQL문 준비 / 바인딩 / 실행
-					String query = ""; // 쿼리문 문자열만들기, ? 주의
+					String query = ""; 
 					query += " delete from guestbook ";
 					query += " where password = ?";
 					query += "and no=?";
-					pstmt = conn.prepareStatement(query); // 쿼리로 만들기
+					pstmt = conn.prepareStatement(query); 
 
-					pstmt.setString(1, password);// ?(물음표) 중 1번째, 순서중요
-					pstmt.setInt(2, no);// ?(물음표) 중 1번째, 순서중요
+					pstmt.setString(1, password);
+					pstmt.setInt(2, no);
 					
-					count = pstmt.executeUpdate(); // 쿼리문 실행
-
-					// 4.결과처리
-					// System.out.println(count + "건 삭제되었습니다.");
+					count = pstmt.executeUpdate();
 
 				} catch (SQLException e) {
 					System.out.println("error:" + e);

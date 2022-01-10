@@ -9,11 +9,8 @@
 	String content = request.getParameter("content");
 	
 	GuestbookVo guestbookVo = new GuestbookVo(name, password, content);
-	
 	GuestbookDao guestbookDao = new GuestbookDao();
-	
 	guestbookDao.guestbookInsert(guestbookVo);
-	
 	List<GuestbookVo> guestbookList = guestbookDao.getList();
 	
 	response.sendRedirect("./addList.jsp");
