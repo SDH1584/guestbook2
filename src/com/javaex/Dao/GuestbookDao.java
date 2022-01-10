@@ -109,7 +109,7 @@ public class GuestbookDao {
 		return count;
 	}
 	
-			public int guestbookDelete(int no,String password ) {
+			public int guestbookDelete(GuestbookVo vo ) {
 				int count = 0;
 				getConnection();
 
@@ -120,8 +120,8 @@ public class GuestbookDao {
 					query += "and no=?";
 					pstmt = conn.prepareStatement(query); 
 
-					pstmt.setString(1, password);
-					pstmt.setInt(2, no);
+					pstmt.setString(1, vo.getPassword());
+					pstmt.setInt(2, vo.getNo());
 					
 					count = pstmt.executeUpdate();
 

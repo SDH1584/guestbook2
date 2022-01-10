@@ -5,7 +5,7 @@
 <%@ page import="com.javaex.vo.GuestbookVo"%>
 
 <%
-List<GuestbookVo> getList = (List<GuestbookVo>)request.getAttribute("getList");	
+List<GuestbookVo> gList = (List<GuestbookVo>)request.getAttribute("guestList");	
 %>
 
 <!DOCTYPE html>
@@ -43,17 +43,17 @@ List<GuestbookVo> getList = (List<GuestbookVo>)request.getAttribute("getList");
 
 
 	<%
-	for(int i = 0; i < getList.size(); i++) {
+	for(int i = 0; i < gList.size(); i++) {
 	%>
 		<table border="1">
 			<tr>
-				<td><%= getList.get(i).getNo()%></td>
-				<td><%= getList.get(i).getName() %></td>
-				<td><%= getList.get(i).getRegDate() %></td>
-				<td><a href="/guestbook2/gbc?action=deleteForm&no=<%= getList.get(i).getNo()%>">삭제</a></td>
+				<td><%= gList.get(i).getNo()%></td>
+				<td><%= gList.get(i).getName() %></td>
+				<td><%= gList.get(i).getRegDate() %></td>
+				<td><a href="/guestbook2/gbc?action=deleteForm&no=<%= gList.get(i).getNo()%>">삭제</a></td>
 			</tr>
 			<tr>
-				<td colspan="4"><%= getList.get(i).getContent() %></td>
+				<td colspan="4"><%= gList.get(i).getContent() %></td>
 			</tr>
 		</table>
 		</br>
