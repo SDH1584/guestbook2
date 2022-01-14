@@ -12,9 +12,9 @@ import com.javaex.vo.GuestbookVo;
 
 public class GuestbookDao {
 
-	Connection conn = null;
-	PreparedStatement pstmt = null;
-	ResultSet rs = null;
+	private Connection conn = null;
+	private PreparedStatement pstmt = null;
+	private ResultSet rs = null;
 
 	private String driver = "oracle.jdbc.driver.OracleDriver";
 	private String url = "jdbc:oracle:thin:@localhost:1521:xe";
@@ -109,19 +109,19 @@ public class GuestbookDao {
 		return count;
 	}
 	
-			public int guestbookDelete(GuestbookVo vo ) {
+			public int delete(GuestbookVo vo ) {
 				int count = 0;
 				getConnection();
 
 				try {
 					String query = ""; 
 					query += " delete from guestbook ";
-					query += " where password = ?";
-					query += "and no=?";
+					query += " where no= ?";
+					query += "and password=?";
 					pstmt = conn.prepareStatement(query); 
 
-					pstmt.setString(1, vo.getPassword());
-					pstmt.setInt(2, vo.getNo());
+					pstmt.setInt(1, vo.getNo());
+					pstmt.setString(2, vo.getPassword());
 					
 					count = pstmt.executeUpdate();
 

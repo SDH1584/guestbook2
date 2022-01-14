@@ -15,7 +15,6 @@ import com.javaex.vo.GuestbookVo;
 
 @WebServlet("/gbc")
 public class Guestbookcontroller extends HttpServlet {
-	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -51,7 +50,7 @@ public class Guestbookcontroller extends HttpServlet {
 			vo.setPassword(password);
 
 			GuestbookDao dao = new GuestbookDao();
-			dao.guestbookDelete(vo);
+			dao.delete(vo);
 
 			
 			//리다이렉트
