@@ -13,59 +13,59 @@ import com.javaex.Dao.GuestbookDao;
 import com.javaex.utill.Webutill;
 import com.javaex.vo.GuestbookVo;
 
-@WebServlet("/gbc")
+@WebServlet("/guest")
 public class Guestbookcontroller extends HttpServlet {
+
+	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
+		System.out.println("/guest");
 
 		String action = request.getParameter("action");
 
 		if ("add".equals(action)) {
+			System.out.println("action=add");
 
 			String name = request.getParameter("name");
-			String password = request.getParameter("pass");
+			String password = request.getParameter("password");
 			String content = request.getParameter("content");
-
+				
+			GuestbookVo vo = new GuestbookVo(name, password,content);
 			GuestbookDao dao = new GuestbookDao();
-			GuestbookVo vo = new GuestbookVo(name, password, content);
-			dao.guestbookInsert(vo);
-			System.out.println(vo.toString());
+			System.out.println(vo);
+			dao.insert(vo);
 
-			//리다이렉트
-			Webutill.redirect(request, response, "/guestbook2/gbc");
-			
-		} else if ("deleteform".equals(action)) {
+			Webutill.redirect(request, response, "/mysite/guest?action=addList");
 
-			//포워드
-			Webutill.forward(request, response, "/WEB-INF/deleteForm.jsp");
+		} else if ("deleteForm".equals(action)) {
+			System.out.println("action=deleteform");
 
+			Webutill.forward(request, response, "/WEB-INF/views/guest/deleteForm.jsp");
+	
 		} else if ("delete".equals(action)) {
+			System.out.println("action=delete");
+
 			int no = Integer.parseInt(request.getParameter("no"));
-			String password = request.getParameter("pass");
-
-			GuestbookVo vo = new GuestbookVo();
-			vo.setNo(no);
-			vo.setPassword(password);
+			String password = request.getParameter("password");
 
 			GuestbookDao dao = new GuestbookDao();
-			dao.delete(vo);
+			dao.delete(no,password);
+			
+			Webutill.redirect(request, response, "/mysite/guest?action=addList");
 
-			
-			//리다이렉트
-			Webutill.redirect(request, response, "/guestbook2/gbc");
-			
-		} else {//리스트 를 기본값으로
+		} else if("addList".equals(action)){
+			System.out.println("addList");
 			GuestbookDao dao = new GuestbookDao();
-			List<GuestbookVo> gList = dao.getList();
-
-			request.setAttribute("guestList", gList);
 			
-			//포워드
-			Webutill.forward(request, response, "/WEB-INF/addList.jsp");
+			List<GuestbookVo> getList = dao.getList();
+			System.out.println(getList);
+			request.setAttribute("getList", getList);
+			
+			Webutill.forward(request, response, "/WEB-INF/views/guest/addList.jsp");
+		}else{
+			System.out.println("error");
 		}
-
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
